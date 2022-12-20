@@ -3,7 +3,7 @@ const url = require("url");
 const fs = require("fs");
 
 const port = 8080;
-const hostname = "localhost";
+const hostname = "0.0.0.0";
 
 http
   .createServer(function (req, res) {
