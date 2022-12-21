@@ -8,9 +8,13 @@ const hostname = "0.0.0.0";
 http
   .createServer(function (req, res) {
     const q = url.parse(req.url, true);
-    const filename = "." + q.pathname;
-    const pages = ["./index.html", "./about.html", "./contact-me.html"];
+    let filename = "." + q.pathname;
 
+    if (filename === "./") {
+      filename = "./index.html";
+    }
+
+    const pages = ["./index.html", "./about.html", "./contact-me.html"];
     if (pages.indexOf(filename) !== -1) {
       fs.readFile(filename, function (err, data) {
         if (err) throw Error;
@@ -22,7 +26,7 @@ http
     } else {
       fs.readFile("404.html", function (err, data) {
         if (err) throw Error;
-        
+
         res.writeHead(404, { "Content-Type": "text/html" });
         res.write(data);
         return res.end();
