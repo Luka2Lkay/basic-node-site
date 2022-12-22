@@ -1,0 +1,61 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+hr {
+    width: 50%;
+    margin: 0px auto 2em auto;
+}
+
+.active {
+    color: #fff;
+}
+
+h1 {
+    line-height: 2em;
+}
+
+a {
+    text-decoration: none;
+    color: gold;
+}
+
+li {
+    list-style-type: none;
+}
+
+a:hover {
+    color: #fff;
+}
+
+.nav__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.navigation {
+    display: grid;
+    background-color: #000;
+    justify-content: end;
+    color: #fff;
+    width: 100%;
+}
+
+.nav__list li a {
+    font-size: 1.5rem;
+    display: inline-block;
+    padding: 15px;
+    text-transform: uppercase;
+}
+
+h1 {
+    text-align: center;
+    color: red;
+}
