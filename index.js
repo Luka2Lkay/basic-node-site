@@ -1,38 +1,30 @@
-const http = require("http");
-const url = require("url");
-const fs = require("fs");
+const express = require("express");
+const app = express();
+const { readFile } = require("fs").promises;
 
-const port = 8080;
+const port = process.env.PORT || 8080;
 const hostname = "0.0.0.0";
 
-http
-  .createServer(function (req, res) {
-    const q = url.parse(req.url, true);
-    let filename = "." + q.pathname;
+app.get("/", async (req, res) => {
+  res.send(await readFile("index.html", "utf8"));
+});
 
-    if (filename === "./") {
-      filename = "./index.html";
-    }
+app.get("/index.html", async (req, res) => {
+  res.send(await readFile("index.html", "utf8"));
+});
 
-    const pages = ["./index.html", "./about.html", "./contact-me.html"];
-    if (pages.indexOf(filename) !== -1) {
-      fs.readFile(filename, function (err, data) {
-        if (err) throw Error;
+app.get("/about.html", async (req, res) => {
+  res.send(await readFile("about.html", "utf8"));
+});
 
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-        return res.end();
-      });
-    } else {
-      fs.readFile("404.html", function (err, data) {
-        if (err) throw Error;
+app.get("/contact-me.html", async (req, res) => {
+  res.send(await readFile("contact-me.html", "utf8"));
+});
 
-        res.writeHead(404, { "Content-Type": "text/html" });
-        res.write(data);
-        return res.end();
-      });
-    }
-  })
-  .listen(port, hostname, () => {
-    console.log(`http://${hostname}:${port}/index.html`);
-  });
+app.use(async (req, res) => {
+  res.status(404).send(await readFile("404.html", "utf8"));
+});
+
+app.listen(port, hostname, () => {
+  console.log(`http://${hostname}:${port}`);
+});
