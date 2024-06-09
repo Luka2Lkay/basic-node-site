@@ -8,9 +8,9 @@ app.use(async (req, res) => {
   res.status(404).send(await readFile("404.html", "utf8"));
 });
 
-const port = process.env.PORT || 8080;
-const hostname = "0.0.0.0";
+const port = 8080;
+const hostname = "localhost";
 
 app.listen(port, hostname, () => {
-  console.log(`http://${hostname}:${port}`);
+  console.log(`The server is running on http://${hostname}:${port}`);
 });
